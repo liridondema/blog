@@ -1,0 +1,38 @@
+<section class="vh-100">
+  <div class="container py-5 h-100">
+    <div class="d-flex justify-content-center align-items-center h-100">
+      <div style="max-width: 800px">
+        <form [formGroup]="blogForm" style="width: 26rem">
+          <div data-mdb-input-init class="form-outline mb-4">
+            <input
+              type="text"
+              id="title"
+              class="form-control"
+              formControlName="title"
+            />
+            <label class="form-label" for="title">Titel</label>
+          </div>
+
+          <div data-mdb-input-init class="form-outline mb-4">
+            <textarea
+              class="form-control"
+              id="content"
+              rows="4"
+              formControlName="content"
+            ></textarea>
+            <label class="form-label" for="content">Content</label>
+          </div>
+
+          <button
+            data-mdb-ripple-init
+            type="button"
+            class="btn btn-primary btn-block mb-4"
+            (click)="addBlog()"
+          >
+            Speichern
+          </button>
+        </form>
+      </div>
+    </div>
+  </div>
+</section>

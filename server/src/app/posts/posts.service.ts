@@ -18,7 +18,7 @@ export class PostsService {
     return this.postRepository.save(post);
   }
 
-  findAll() {
+  findAll(): Promise<Post[]> {
     return this.postRepository.find();
   }
 

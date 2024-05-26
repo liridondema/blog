@@ -1,31 +1,38 @@
 <section class="vh-100">
   <div class="container py-5 h-100">
-    <div class="d-flex justify-content-center align-items-center h-100">
-      <div style="max-width: 800px">
-        <div class="card m-2" style="max-width: 540px">
+    <div class="d-flex justify-content-center align-items-center">
+      <div style="max-width: 600px">
+        @for (blog of blogs(); track blog.id){
+        <div
+          class="card m-2"
+          [routerLink]="'/blog/' + blog.id"
+          routerLinkActive="router-link-active"
+        >
           <div class="row g-0">
             <div class="col-md-4">
               <img
                 src="https://mdbcdn.b-cdn.net/img/Photos/Vertical/mountain1.webp"
                 class="img-fluid rounded-start"
+                style="width: 100%"
               />
             </div>
             <div class="col-md-8">
               <div class="card-body">
-                <h5 class="card-title">Card title</h5>
-                <p class="card-text">
-                  This is a wider card with supporting text below as a natural
-                  lead-in to additional content. This content is a little bit
-                  longer.
+                <h5 class="card-title">{{ blog.title }}</h5>
+                <p class="card-text content">
+                  {{ blog.content }}
                 </p>
                 <p class="card-text">
-                  <small class="text-muted">Last updated 3 mins ago</small>
+                  <small class="text-muted">ID: {{ blog.id }}</small>
                 </p>
               </div>
             </div>
           </div>
         </div>
-        <div class="card m-2" style="max-width: 540px">
+
+        }
+
+        <!-- <div class="card m-2" style="max-width: 540px">
           <div class="row g-0">
             <div class="col-md-4">
               <img
@@ -70,7 +77,7 @@
               </div>
             </div>
           </div>
-        </div>
+        </div> -->
       </div>
     </div>
   </div>
