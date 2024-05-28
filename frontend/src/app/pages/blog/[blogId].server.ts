@@ -9,11 +9,14 @@ export const load = async ({
   fetch, // internal fetch for direct API calls,
   event, // full request event
 }: PageServerLoad) => {
-  const id = params?.['blogId'];
-  const data = await fetch<Post>(`http://localhost:3000/api/posts/${id}`, {
-    headers: {
-      'Content-Type': 'application/json',
-    },
-  });
+  console.log(params);
+  const data = await fetch<Post>(
+    `http://localhost:3000/api/posts/${params?.['blogId']}`,
+    {
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    }
+  );
   return data;
 };
