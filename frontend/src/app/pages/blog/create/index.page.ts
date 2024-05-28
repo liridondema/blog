@@ -20,12 +20,10 @@ import { catchError, throwError } from 'rxjs';
   standalone: true,
   imports: [ReactiveFormsModule],
   templateUrl: './create.component.html',
-  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export default class BlogCreatePage {
   private _http = inject(HttpClient);
   private _toastr = inject(ToastrService);
-  private _zone = inject(NgZone);
   private _router = inject(Router);
 
   blogForm = new FormGroup({
@@ -49,15 +47,12 @@ export default class BlogCreatePage {
       .pipe(catchError(this.handleError))
       .subscribe({
         next: (res) => {
-          console.log('Success:', res);
           this.blogForm.reset();
-          this._zone.run(() => {
-            this._router.navigate(['/']);
-            this._toastr.success(
-              'Successfull!',
-              'You have added a new blog post. Good job.'
-            );
-          });
+          this._router.navigate(['/']);
+          this._toastr.success(
+            'Successfull!',
+            'You have added a new blog post. Good job.'
+          );
         },
         error: (err) => {
           console.error('Error:', err);

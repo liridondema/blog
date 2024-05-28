@@ -9,7 +9,7 @@ export const appConfig: ApplicationConfig = {
   providers: [
     provideFileRouter(),
     provideClientHydration(),
-    provideHttpClient(withFetch()),
+    provideHttpClient(),
     provideAnimations(),
     provideToastr({
       timeOut: 5000,
