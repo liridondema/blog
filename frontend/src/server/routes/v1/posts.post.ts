@@ -3,7 +3,6 @@ import { defineEventHandler, readBody } from 'h3';
 
 export default defineEventHandler(async (event) => {
   const body = await readBody(event);
-  console.log(body);
   const data = await $fetch<PostDTO>('http://localhost:3000/api/posts', {
     method: 'POST',
     headers: {

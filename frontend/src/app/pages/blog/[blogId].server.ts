@@ -9,7 +9,6 @@ export const load = async ({
   fetch, // internal fetch for direct API calls,
   event, // full request event
 }: PageServerLoad) => {
-  console.log(params);
   const data = await fetch<Post>(
     `http://localhost:3000/api/posts/${params?.['blogId']}`,
     {
