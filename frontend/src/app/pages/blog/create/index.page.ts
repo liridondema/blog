@@ -1,11 +1,17 @@
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
-import { Component, inject } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  NgZone,
+  inject,
+} from '@angular/core';
 import {
   FormGroup,
   FormControl,
   Validators,
   ReactiveFormsModule,
 } from '@angular/forms';
+import { Router } from '@angular/router';
 import { PostDTO } from 'frontend/src/app/models/post';
 import { ToastrService } from 'ngx-toastr';
 import { catchError, throwError } from 'rxjs';
@@ -14,10 +20,13 @@ import { catchError, throwError } from 'rxjs';
   standalone: true,
   imports: [ReactiveFormsModule],
   templateUrl: './create.component.html',
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export default class BlogCreatePage {
   private _http = inject(HttpClient);
   private _toastr = inject(ToastrService);
+  private _zone = inject(NgZone);
+  private _router = inject(Router);
 
   blogForm = new FormGroup({
     title: new FormControl('', {
@@ -41,11 +50,14 @@ export default class BlogCreatePage {
       .subscribe({
         next: (res) => {
           console.log('Success:', res);
-          this._toastr.success(
-            'Successfull!',
-            'You have added a new blog post. Good job.'
-          );
           this.blogForm.reset();
+          this._zone.run(() => {
+            this._router.navigate(['/']);
+            this._toastr.success(
+              'Successfull!',
+              'You have added a new blog post. Good job.'
+            );
+          });
         },
         error: (err) => {
           console.error('Error:', err);
